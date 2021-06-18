@@ -9,14 +9,12 @@ class AddFoodButton extends Component {
         this.togglebutton = this.togglebutton.bind(this);
       }
 
-
       togglebutton() {
           const { open } = this.state;
           this.setState({
               open: !open,
           })
       }
-
 
 
     render() {
