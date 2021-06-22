@@ -25,28 +25,28 @@ class FoodBox extends Component {
           name: this.state.name,
           calories: this.state.calories * this.state.quantity,
       }
-      
+      // console.log(this.state)
      this.props.onAddFoodDetails(AddFoodValories)
-     console.log(this.state)
 
   }
 
         render() { 
 
+        const { name, calories, image } = this.props
 
         return(
             <div className="box" style={{width: '460px'}}>
             <article className="media" >
               <div className="media-left">
                 <figure className="image is-64x64">
-                  <img src={this.state.image} />
+                  <img src={image} />
                 </figure>
               </div>
               <div className="media-content">
                 <div className="content">
                   <p>
-                    <strong>{this.state.name}</strong> <br />
-                    <small>{this.state.calories}</small>
+                    <strong>{name}</strong> <br />
+                    <small>{calories}</small>
                   </p>
                 </div>
               </div>

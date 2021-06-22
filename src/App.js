@@ -10,7 +10,7 @@ import 'bulma/css/bulma.css';
 
 import './App.css';
 
-const ShowdetailsFood = ({name, calories, quantity }) => ({ name: name, calories: calories, quantity: quantity});
+// const ShowdetailsFood = ({name, calories, quantity }) => ({ name: name, calories: calories, quantity: quantity});
 
 const buildFood = ({name, calories, image }) => ({ name: name, calories: calories, image: image });
 
@@ -42,22 +42,25 @@ class App extends Component {
   }
 
   handleDetailsFood = (food) => {
-    const FoodToday = [...this.state.todayFood];
-    const index = this.state.todayFood.findIndex((ele) => ele.name === food.name)
+    console.log(this.state.todayFood)
+    const { todayFood } = this.state;
+    const selected = [...todayFood];
+
+    const index = selected.findIndex((ele) => ele.name === food.name)
     if(index === -1) {
-      FoodToday.push(ShowdetailsFood(food));
+      selected.push(food);
       this.setState({
-        todayFood: FoodToday,
+        todayFood: selected,
       });
     } else {
-      FoodToday[index].calories = 
-      food.calories + FoodToday[index].calories;
+      selected[index].calories = 
+      food.calories + selected[index].calories;
 
-      FoodToday[index].quantity = 
-      food.quantity + FoodToday[index].quantity;
+      selected[index].quantity = 
+      food.quantity + selected[index].quantity;
 
       this.setState({
-        todayFood: FoodToday
+        todayFood: selected
       })
 
     }
@@ -89,10 +92,10 @@ class App extends Component {
             
             <div className="is-flex is-flex-direction-row"> 
             <section>
-            {filterFoods.map((food) => {
+            {filterFoods.map((food, index) => {
             return (
               <FoodBox 
-                    
+                    key={index}
                     name={food.name}
                     calories={food.calories}
                     image={food.image}
@@ -111,7 +114,6 @@ class App extends Component {
               <section> 
                 <ul>
                   <li key={index}>◦ {food.quantity} {food.name} = {food.calories} cal</li>
-
                 </ul>
                     
                 </section>
